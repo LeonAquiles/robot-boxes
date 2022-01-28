@@ -18,10 +18,10 @@ async def start(client, message):
     if message.chat.type in ['group', 'supergroup']:
         buttons = [
             [
-                InlineKeyboardButton('ᴄʜᴀɴɴᴀʟ', url='https://t.me/joinchat/FYBCIcMfr0AyOTFl')
+                InlineKeyboardButton('Campus Comercial', url='https://www.campuscomercialypf.com')
             ],
             [
-                InlineKeyboardButton('𝙷𝙴𝙻𝙿', url=f"https://t.me/{temp.U_NAME}?start=help"),
+                InlineKeyboardButton('Guía de Lubricacion', url='https://www.ypf.com/ypfboxes/Paginas/Guia-de-Lubricacion.aspx'),
             ]
             ]
         reply_markup = InlineKeyboardMarkup(buttons)
