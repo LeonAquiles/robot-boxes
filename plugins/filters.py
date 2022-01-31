@@ -15,9 +15,7 @@ from info import ADMINS
 
 @Client.on_message(filters.command(['filter', 'add']) & filters.incoming)
 async def addfilter(client, message):
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply(f"You are anonymous admin. Use /connect {message.chat.id} in PM")
+    userid = message.from_user.id
     chat_type = message.chat.type
     args = message.text.html.split(None, 1)
 
@@ -91,7 +89,7 @@ async def addfilter(client, message):
         try:
             msg = get_file_id(message.reply_to_message)
             fileid = msg.file_id if msg else None
-            reply_text, btn, alert = parser(extracted[1], text) if message.reply_to_message.sticker else parser(message.reply_to_message.caption.html, text)
+            reply_text, btn, alert = parser(message.reply_to_message.caption.html, text)
         except:
             reply_text = ""
             btn = "[]"
@@ -120,9 +118,7 @@ async def addfilter(client, message):
 async def get_all(client, message):
     
     chat_type = message.chat.type
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply(f"You are anonymous admin. Use /connect {message.chat.id} in PM")
+    userid = message.from_user.id
     if chat_type == "private":
         userid = message.from_user.id
         grpid = await active_connection(str(userid))
@@ -182,9 +178,7 @@ async def get_all(client, message):
         
 @Client.on_message(filters.command('del') & filters.incoming)
 async def deletefilter(client, message):
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply(f"You are anonymous admin. Use /connect {message.chat.id} in PM")
+    userid = message.from_user.id
     chat_type = message.chat.type
 
     if chat_type == "private":
@@ -233,9 +227,7 @@ async def deletefilter(client, message):
 
 @Client.on_message(filters.command('delall') & filters.incoming)
 async def delallconfirm(client, message):
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply(f"You are anonymous admin. Use /connect {message.chat.id} in PM")
+    userid = message.from_user.id
     chat_type = message.chat.type
 
     if chat_type == "private":
