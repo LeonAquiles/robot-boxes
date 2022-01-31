@@ -1,6 +1,9 @@
 import pymongo
 from info import DATABASE_URI, DATABASE_NAME
- 
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.ERROR)
+
 myclient = pymongo.MongoClient(DATABASE_URI)
 mydb = myclient[DATABASE_NAME]
 
@@ -21,7 +24,7 @@ async def add_filter(grp_id, text, reply_text, btn, file, alert):
     try:
         mycol.update_one({'text': str(text)},  {"$set": data}, upsert=True)
     except:
-        print('Couldnt save, check your db')
+        logger.exception('Some error occured!', exc_info=True)
              
      
 async def find_filter(group_id, name):
@@ -91,10 +94,7 @@ async def count_filters(group_id):
     mycol = mydb[str(group_id)]
 
     count = mycol.count()
-    if count == 0:
-        return False
-    else:
-        return count
+    return False if count == 0 else count
 
 
 async def filter_stats():
